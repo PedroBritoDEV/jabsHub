@@ -598,7 +598,7 @@ const About = () => {
               <picture className="w-12 h-12 rounded-full">
                 <img
                   className="overflow-hidden rounded-full"
-                  src="jabs-profile.jpeg"
+                  src="./jabs-profile.jpeg"
                   alt="DH"
                 />
               </picture>
