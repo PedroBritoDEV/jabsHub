@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import {
   Database,
@@ -100,8 +100,8 @@ const Hero = () => {
               A Base Empresarial Mais Completa do Brasil em Um Só Lugar
             </h1>
             <p className="text-lg md:text-xl text-brand-200/80 leading-relaxed mb-10 max-w-2xl">
-              Dados empresariais públicos organizados por estado, região e CNAE. Pronto para análise comercial e inteligência estratégica.
-
+              Dados empresariais públicos organizados por estado, região e CNAE.
+              Pronto para análise comercial e inteligência estratégica.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
@@ -153,7 +153,7 @@ const Hero = () => {
                 <p className="text-2xl font-display font-bold">Nacional</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center">
                 <Zap className="text-amber-400 w-6 h-6" />
               </div>
@@ -163,7 +163,7 @@ const Hero = () => {
                 </p>
                 <p className="text-2xl font-display font-bold">Semanal</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </motion.div>
       </div>
@@ -171,24 +171,88 @@ const Hero = () => {
   );
 };
 
+const HowItWorks = () => {
+  const steps = [
+    {
+      title: "Escolha sua Base",
+      description:
+        "Selecione o pacote de dados que melhor atende seu nicho de atuação.",
+      icon: <Database className="w-6 h-6" />,
+    },
+    {
+      title: "Pagamento Seguro",
+      description:
+        "Finalize sua compra através da Kirvano com total segurança e garantia.",
+      icon: <ShieldCheck className="w-6 h-6" />,
+    },
+    {
+      title: "Entrega Imediata",
+      description:
+        "Receba o link de download e acesso à plataforma instantaneamente após a confirmação.",
+      icon: <Zap className="w-6 h-6" />,
+    },
+    {
+      title: "Escala de Vendas",
+      description:
+        "Importe os dados e comece a converter novos clientes com inteligência.",
+      icon: <BarChart3 className="w-6 h-6" />,
+    },
+  ];
+
+  return (
+    <motion.section
+      id="como-funciona"
+      className="py-24 bg-brand-950"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            Como Funciona
+          </h2>
+          <p className="text-brand-200/70 max-w-2xl mx-auto">
+            Processo simplificado para você focar no que importa: vender mais.
+          </p>
+        </div>
+        <div className="md:w-5/6 m-auto aspect-video">
+          <iframe
+            className="w-full h-full rounded-2xl"
+            src="https://www.youtube.com/embed/1l8tEUBKH_I?autoplay=1&mute=1&loop=1&playlist=1l8tEUBKH_I"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="grid md:grid-cols-4 gap-8 relative mt-14">
+          {steps.map((step, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{ y: -15 }}
+              className="relative z-10 text-center"
+            >
+              <div className="w-24 h-24 bg-brand-900 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <div className="w-16 h-16 bg-brand-600 rounded-full flex items-center justify-center text-white">
+                  {step.icon}
+                </div>
+              </div>
+
+              <h4 className="font-bold text-xl mb-3">{step.title}</h4>
+
+              <p className="text-sm text-brand-200/60 leading-relaxed">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  );
+};
+
 const Products = () => {
   const products = [
-    {
-      title: "Bases por Estado",
-      description:
-        "Bases de dados específicas por estado brasileiro, ideais para prospecção localizada e segmentada.",
-      price: "R$ 97 a R$ 197",
-      features: [
-        "Razão social",
-        "CNPJ",
-        "CNAE",
-        "Endereço comercial",
-        "Situação cadastral",
-        "Informações de contato comercial registradas publicamente",
-      ],
-      icon: <Database className="w-8 h-8 text-brand-400" />,
-      link: "https://kirvano.com/p/base-estado",
-    },
     {
       title: "Bases por Região",
       description:
@@ -223,6 +287,18 @@ const Products = () => {
     },
   ];
 
+  const regionLinks = {
+    todas: "https://kirvano.com/p/base-regiao",
+    norte: "https://kirvano.com/p/base-regiao-norte",
+    nordeste: "https://kirvano.com/p/base-regiao-nordeste",
+    "centro-oeste": "https://kirvano.com/p/base-regiao-centro-oeste",
+    sudeste: "https://kirvano.com/p/base-regiao-sudeste",
+    sul: "https://kirvano.com/p/base-regiao-sul",
+  };
+
+  const [selectedRegion, setSelectedRegion] =
+    useState<keyof typeof regionLinks>("todas");
+
   return (
     <motion.section
       id="produtos"
@@ -243,18 +319,18 @@ const Products = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex flex-col md:flex-row gap-8">
           {products.map((product, idx) => (
             <motion.div
               key={idx}
               whileHover={{ y: -15 }}
-              className={`glass-card p-8 flex flex-col h-full border rounded-lg shadow-md shadow-white/10 relative ${
-                product.title === "Bases por Região"
+              className={`glass-card p-8 flex flex-col h-full md:w-1/2 border rounded-lg shadow-md shadow-white/10 relative ${
+                product.title === "Base Brasil Completa"
                   ? "border-emerald-500 bg-emerald-500/10 shadow-2xl shadow-emerald-500/20 "
                   : "border-white/10"
               }`}
             >
-              {product.title === "Bases por Região" && (
+              {product.title === "Base Brasil Completa" && (
                 <div className="mb-4 absolute -top-3">
                   <span className=" px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full">
                     Mais Popular
@@ -262,9 +338,32 @@ const Products = () => {
                 </div>
               )}
               <div className="mb-6">{product.icon}</div>
-              <h3 className="font-display text-2xl font-bold mb-4">
-                {product.title}
-              </h3>
+              <div className="flex items-center gap-10">
+                <h3 className="font-display text-2xl font-bold mb-4">
+                  {product.title}
+                </h3>
+                {product.title === "Bases por Região" && (
+                  <div className="mb-6">
+                    
+                    <select
+                      value={selectedRegion}
+                      onChange={(e) =>
+                        setSelectedRegion(
+                          e.target.value as keyof typeof regionLinks,
+                        )
+                      }
+                      className="w-full bg-brand-950/60 border border-white/10 text-white px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    >
+                      <option value="todas">Todas as Regiões</option>
+                      <option value="norte">Norte</option>
+                      <option value="nordeste">Nordeste</option>
+                      <option value="centro-oeste">Centro-Oeste</option>
+                      <option value="sudeste">Sudeste</option>
+                      <option value="sul">Sul</option>
+                    </select>
+                  </div>
+                )}
+              </div>
               <p className="text-brand-200/70 text-sm mb-8 flex-grow leading-relaxed">
                 {product.description}
               </p>
@@ -279,9 +378,10 @@ const Products = () => {
                   </li>
                 ))}
               </ul>
+
               <div className="pt-6 border-t border-white/10">
                 <div className="flex justify-between items-baseline gap-2 mb-4">
-                  <span className="text-2xl text-white font-display font-bold">
+                  <span className="text-4xl text-white font-display font-bold">
                     {product.price}
                   </span>
                   <span className="text-xs text-white uppercase font-bold">
@@ -289,7 +389,11 @@ const Products = () => {
                   </span>
                 </div>
                 <a
-                  href={product.link}
+                  href={
+                    product.title === "Bases por Região"
+                      ? regionLinks[selectedRegion]
+                      : product.link
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 text-white py-3 rounded-xl font-bold transition-all hover:scale-105"
@@ -382,7 +486,11 @@ const Solutions = () => {
             <motion.div
               className="absolute -top-2 left-0 md:left-10 w-18 h-18 rounded-full border-2 border-white/20 overflow-hidden shadow-lg"
               animate={{ y: [0, -8, 0], x: [0, 2, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
               <img
                 src="https://picsum.photos/48/48?random=1"
@@ -393,7 +501,12 @@ const Solutions = () => {
             <motion.div
               className="absolute -top-2 right-0 md:right-10 w-18 h-18 rounded-full border-2 border-white/20 overflow-hidden shadow-lg"
               animate={{ y: [0, -8, 0], x: [0, -2, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
             >
               <img
                 src="https://picsum.photos/48/48?random=2"
@@ -404,7 +517,12 @@ const Solutions = () => {
             <motion.div
               className="absolute -bottom-2 -left-10 md:left-10 w-18 h-18 rounded-full border-2 border-white/20 overflow-hidden shadow-lg"
               animate={{ y: [0, -8, 0], x: [0, 2, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
             >
               <img
                 src="https://picsum.photos/48/48?random=3"
@@ -415,7 +533,12 @@ const Solutions = () => {
             <motion.div
               className="absolute -bottom-2 -right-10 md:right-10 w-18 h-18 rounded-full border-2 border-white/20 overflow-hidden shadow-lg"
               animate={{ y: [0, -8, 0], x: [0, -2, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.5,
+              }}
             >
               <img
                 src="https://picsum.photos/48/48?random=4"
@@ -426,7 +549,12 @@ const Solutions = () => {
             <motion.div
               className="absolute top-70  w-18 h-18 rounded-full border-2 border-white/20 overflow-hidden shadow-lg"
               animate={{ y: [0, -8, 0], x: [0, 3, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
             >
               <img
                 src="https://picsum.photos/48/48?random=5"
@@ -435,8 +563,7 @@ const Solutions = () => {
               />
             </motion.div>
 
-            <motion.div
-              className="w-64 h-64 glass-card flex items-center justify-center p-8 relative overflow-hidden">
+            <motion.div className="w-64 h-64 glass-card flex items-center justify-center p-8 relative overflow-hidden">
               <div className="relative z-10 text-center">
                 <div className="w-24 h-24 bg-brand-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-brand-600/40 animate-pulse">
                   <Lock className="text-white w-10 h-10" />
@@ -450,79 +577,6 @@ const Solutions = () => {
               </div>
             </motion.div>
           </motion.div>
-        </div>
-      </div>
-    </motion.section>
-  );
-};
-
-const HowItWorks = () => {
-  const steps = [
-    {
-      title: "Escolha sua Base",
-      description:
-        "Selecione o pacote de dados que melhor atende seu nicho de atuação.",
-      icon: <Database className="w-6 h-6" />,
-    },
-    {
-      title: "Pagamento Seguro",
-      description:
-        "Finalize sua compra através da Kirvano com total segurança e garantia.",
-      icon: <ShieldCheck className="w-6 h-6" />,
-    },
-    {
-      title: "Entrega Imediata",
-      description:
-        "Receba o link de download e acesso à plataforma instantaneamente após a confirmação.",
-      icon: <Zap className="w-6 h-6" />,
-    },
-    {
-      title: "Escala de Vendas",
-      description:
-        "Importe os dados e comece a converter novos clientes com inteligência.",
-      icon: <BarChart3 className="w-6 h-6" />,
-    },
-  ];
-
-  return (
-    <motion.section
-      id="como-funciona"
-      className="py-24 bg-brand-950"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.5, ease: "easeOut" }}
-      viewport={{ once: true }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Como Funciona
-          </h2>
-          <p className="text-brand-200/70 max-w-2xl mx-auto">
-            Processo simplificado para você focar no que importa: vender mais.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          {steps.map((step, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ y: -15 }}
-              className="relative z-10 text-center"
-            >
-              <div className="w-24 h-24 bg-brand-900 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
-                <div className="w-16 h-16 bg-brand-600 rounded-full flex items-center justify-center text-white">
-                  {step.icon}
-                </div>
-              </div>
-
-              <h4 className="font-bold text-xl mb-3">{step.title}</h4>
-
-              <p className="text-sm text-brand-200/60 leading-relaxed">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
         </div>
       </div>
     </motion.section>
@@ -747,9 +801,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <HowItWorks />
         <Products />
         <Solutions />
-        <HowItWorks />
         <About />
         <Legal />
         <FinalCTA />
