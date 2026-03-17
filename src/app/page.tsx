@@ -612,7 +612,7 @@ const About = () => {
                 <p className="text-xs text-brand-200/60 uppercase font-bold">
                   Dados Públicos
                 </p>
-              </div>
+              </div>fix
               <div className="glass-card p-6 text-center">
                 <p className="text-3xl font-display font-bold text-brand-400 mb-1">
                   LGPD
