@@ -612,15 +612,7 @@ const About = () => {
                 <p className="text-xs text-brand-200/60 uppercase font-bold">
                   Dados Públicos
                 </p>
-              </div>
-              <div className="glass-card p-6 text-center">
-                <p className="text-3xl font-display font-bold text-brand-400 mb-1">
-                  24/7
-                </p>
-                <p className="text-xs text-brand-200/60 uppercase font-bold">
-                  Suporte Ativo
-                </p>
-              </div>
+              </div>fix
               <div className="glass-card p-6 text-center">
                 <p className="text-3xl font-display font-bold text-brand-400 mb-1">
                   LGPD
@@ -678,12 +670,12 @@ const Legal = () => {
       viewport={{ once: true }}
     >
       <div className="max-w-4xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-brand-300 mb-6">
-          <ShieldCheck className="w-3 h-3" />
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/5 border border-white/10  font-bold text-brand-300 mb-6">
+          <ShieldCheck className="w-5 h-5" />
           Conformidade Legal
         </div>
         <h3 className="text-xl font-bold mb-4">Aviso Legal e LGPD</h3>
-        <p className="text-brand-200/50 text-sm leading-relaxed mb-8">
+        <p className="text-brand-200/50 text-medium leading-relaxed mb-8">
           A Duarte Hub atua estritamente de acordo com a Lei Geral de Proteção
           de Dados (LGPD). Todas as informações contidas em nossas bases de
           dados são de origem pública, extraídas de fontes oficiais como a
