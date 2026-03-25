@@ -4,6 +4,7 @@ import HowItWorks from "../components/HowItWorks";
 import Products from "../components/Products";
 import Solutions from "../components/Solutions";
 import About from "../components/About";
+import Feedbacks from "../components/Feedbacks";
 import Legal from "../components/Legal";
 import FinalCTA from "../components/FinalCTA";
 import CRMCarousel from "../components/CRMCarousel";
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <Products />
+        <Feedbacks />
         <Solutions />
         <About />
         <Legal />
