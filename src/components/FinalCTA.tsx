@@ -31,8 +31,7 @@ export default function FinalCTA() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://kirvano.com"
-              target="_blank"
+              href="#products"
               rel="noopener noreferrer"
               className="bg-white text-background px-10 py-5 rounded-2xl font-bold text-xl hover:bg-brand-50 transition-all shadow-2xl shadow-black/20"
             >

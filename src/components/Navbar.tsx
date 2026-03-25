@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Database } from "lucide-react";
 
 export default function Navbar() {
@@ -30,8 +29,7 @@ export default function Navbar() {
           </a>
         </div>
         <a
-          href="https://kirvano.com"
-          target="_blank"
+          href="#products"
           rel="noopener noreferrer"
           className="bg-white p-4 text-background px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-brand-600/20 active:scale-95 hover:scale-105"
         >
